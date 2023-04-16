@@ -15,7 +15,7 @@
     Created 16 April 2023
     By Ian Enochs
     
-    github link
+    https://github.com/ienochs/STARSystem/blob/main/Particle/cellularStarWatchdogAarmand
 */
 
 #include <ThingSpeak.h>// include the ThingSpeak library
