@@ -1,1 +1,54 @@
+%{
+    Duration Data Analytics for Armand
 
+    This code takes treatment application data (position, duration of treatment, 
+    and presence of an error) from a Particle.io Boron, passed from the Labview 
+    program controlling a STAR system. It calculates descriptive statistics 
+    (mean, standard deviation, minimum, and maximum) for each position based on 
+    the last 4500 data observations and plots them.
+
+    Created 15 April 2023
+    By Ian Enochs
+    Modified 16 April 2023
+    By Ian Enochs
+
+    https://github.com/ienochs/STARSystem/blob/main/thingSpeak/durationDataAnalyticsArmand
+%}
+
+% Channel ID to read data from 
+readChannelID = 2108194; 
+% Channel Read API Key   
+readAPIKey = 'R5HNIA1QET8FWR75'; 
+% Position Field ID 
+positionFieldID = 1; 
+% Duration Field ID 
+durationFieldID = 2; 
+
+%Read last 4800 points of position and duration from thingSpeak channel
+data = thingSpeakRead(readChannelID,'Fields',[positionFieldID durationFieldID],'NumPoints',4800, 'ReadKey',readAPIKey,OutputFormat='TimeTable'); 
+
+%Group data by position and calculate summary statistics
+meanDurationByPosition = groupsummary(data,"position",{"mean","std","min","max"},["duration"]);                                   
+
+%Create vectors of each summary statistic by position
+position = meanDurationByPosition.('position');
+durationMean = meanDurationByPosition.('mean_duration');
+durationStd = meanDurationByPosition.('std_duration');
+durationMax = meanDurationByPosition.('max_duration');
+durationMin = meanDurationByPosition.('min_duration');
+
+% Visualize the data
+hold on
+    %Plot mean and standard deviation as error bars
+    errorbar(position,durationMean,durationStd, 'LineStyle','none','Marker','.', 'MarkerSize',10);
+    %Plot max values as ^ symobls
+    scatter(position,durationMax,10,'^');
+    %Plot min values as v symobls    
+    scatter(position,durationMin,10,'v');
+    %Label x axis
+    xlabel('Position');
+    %Label y axis
+    ylabel('Mean duration');
+    %Label the title
+    title('Mean duration by position')
+hold off
