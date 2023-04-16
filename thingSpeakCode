@@ -9,45 +9,46 @@
 
     Created 15 April 2023
     By Ian Enochs
+    Modified 16 April 2023
+    By Ian Enochs
 
+    https://github.com/ienochs/STARSystem/blob/main/thingSpeakCode
 %}
-
 
 % Channel ID to read data from 
 readChannelID = 2108194; 
+% Channel Read API Key   
+readAPIKey = 'R5HNIA1QET8FWR75'; 
 % Position Field ID 
 positionFieldID = 1; 
 % Duration Field ID 
 durationFieldID = 2; 
 
-% Channel Read API Key   
-% If your channel is private, then enter the read API 
-% Key between the '' below:   
-readAPIKey = 'R5HNIA1QET8FWR75'; 
-
+%Read last 4800 points of position and duration from thingSpeak channel
 data = thingSpeakRead(readChannelID,'Fields',[positionFieldID durationFieldID],'NumPoints',4800, 'ReadKey',readAPIKey,OutputFormat='TimeTable'); 
 
-
-
+%Group data by position and calculate summary statistics
 meanDurationByPosition = groupsummary(data,"position",{"mean","std","min","max"},["duration"]);                                   
-disp(meanDurationByPosition);
 
+%Create vectors of each summary statistic by position
 position = meanDurationByPosition.('position');
 durationMean = meanDurationByPosition.('mean_duration');
 durationStd = meanDurationByPosition.('std_duration');
 durationMax = meanDurationByPosition.('max_duration');
 durationMin = meanDurationByPosition.('min_duration');
 
-hold on
 % Visualize the data
-errorbar(position,durationMean,durationStd, 'LineStyle','none','Marker','.', 'MarkerSize',10);
-
-scatter(position,durationMax,10,'^');
-scatter(position,durationMin,10,'v');
-
-
-%scatter(meanDurationByPosition,"position", "mean_duration");
-xlabel('Position');
-ylabel('Mean duration'); 
-title('Mean duration by position')
+hold on
+    %Plot mean and standard deviation as error bars
+    errorbar(position,durationMean,durationStd, 'LineStyle','none','Marker','.', 'MarkerSize',10);
+    %Plot max values as ^ symobls
+    scatter(position,durationMax,10,'^');
+    %Plot min values as v symobls    
+    scatter(position,durationMin,10,'v');
+    %Label x axis
+    xlabel('Position');
+    %Label y axis
+    ylabel('Mean duration');
+    %Label the title
+    title('Mean duration by position')
 hold off
