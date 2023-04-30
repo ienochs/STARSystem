@@ -19,7 +19,7 @@
     By Ian Enochs
 
     
-    https://github.com/ienochs/STARSystem/blob/main/Particle/cellularStarWatchdogAarmand
+    https://github.com/ienochs/STARSystem/blob/main/Particle/cellularStarWatchdogAarmandV2
 */
 
 #include <ThingSpeak.h>// include the ThingSpeak library
