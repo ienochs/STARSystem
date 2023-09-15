@@ -1,5 +1,5 @@
 /* 
-    Cellular STAR Watchdog for Armand
+    Cellular STAR Watchdog
 
     This program received a serial string via USB from the Labview program controlling a STAR System that
     is sent each time a treatment is completed and:
@@ -15,20 +15,20 @@
     Created 16 April 2023
     By Ian Enochs
 
-    Modified 30 April 2023
+    Modified 15 September 2023
     By Ian Enochs
 
     
-    https://github.com/ienochs/STARSystem/blob/main/Particle/cellularStarWatchdogAarmandV2
+    https://github.com/ienochs/STARSystem/blob/main/Particle/starWatchdogCode
 */
 
 #include <ThingSpeak.h>// include the ThingSpeak library
 TCPClient client;// create client that can connect to an IP and channel
 
 //Global variables unique to an individual STAR System
-unsigned long myChannelNumber = 2108194;// ThingSpeak channel number
-const char * myWriteAPIKey = "KCR7FS4DIWGU9SNY";// Thingspeak channel write API key
-String starName = "Armand";// name of STAR System
+unsigned long myChannelNumber = XXXXXXX;// NOTE MUST EDIT: ThingSpeak channel number 
+const char * myWriteAPIKey = "XXXXXXXXXXXXXX";// NOTE MUST EDIT: Thingspeak channel write API key
+String starName = "XXXXXXX";// NOTE MUST EDIT: name of STAR System
 
 //Global variables that can be shared across STAR Systems
 String commandString = "";// serial string received from STAR System
