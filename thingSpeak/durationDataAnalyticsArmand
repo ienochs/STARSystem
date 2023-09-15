@@ -1,5 +1,5 @@
 %{
-    Duration Data Analytics for Armand
+    Duration Data Analytics for STAR via ThingSpeak
 
     This code takes treatment application data (position, duration of treatment, 
     and presence of an error) from a Particle.io Boron, passed from the Labview 
@@ -9,16 +9,16 @@
 
     Created 15 April 2023
     By Ian Enochs
-    Modified 16 April 2023
+    Modified 15 September 2023
     By Ian Enochs
 
-    https://github.com/ienochs/STARSystem/blob/main/thingSpeak/durationDataAnalyticsArmand
+    https://github.com/ienochs/STARSystem/blob/main/thingSpeak/thingspeakCode
 %}
 
-% Channel ID to read data from 
-readChannelID = 2108194; 
-% Channel Read API Key   
-readAPIKey = 'R5HNIA1QET8FWR75'; 
+% Channel ID to read data from, NOTE: MUST EDIT 
+readChannelID = XXXXXXX; 
+% Channel Read API Key, NOTE: MUST EDIT 
+readAPIKey = 'XXXXXXXXX'; 
 % Position Field ID 
 positionFieldID = 1; 
 % Duration Field ID 
