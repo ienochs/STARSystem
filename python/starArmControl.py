@@ -5,7 +5,7 @@
     of a xArm 6 robotic arm with direct drive linear motor (UFactory). Errors
     and error locations are returned to Labview.
 
-    Created 23 April 2023
+    Created 15 September 2023
     By Ian Enochs
 
     https://github.com/ienochs/STARSystem/blob/main/python/starArmControl.py
@@ -35,7 +35,7 @@ def pprint(*args, **kwargs):
 pprint('xArm-Python-SDK Version:{}'.format(version.__version__))
 
 # Set up the xarm
-arm = XArmAPI('192.168.1.216', baud_checkset=False)# Set the arm address
+arm = XArmAPI('XXX.XXX.X.XXX', baud_checkset=False)# Set the arm address, NOTE: NEED TO EDIT
 arm.clean_warn()# Cleans warnings
 arm.clean_error()# Cleans errors
 arm.motion_enable(True)# Enable motion
