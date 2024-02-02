@@ -101,7 +101,7 @@ def errorCheck(errorCheckCode):
     if errorCheckCode != 0:# If errorCheckCode is not equal to zero, quit and return error
         params['quit'] = True
         return("error")
-    if errorCheckCode == 0:# If errorCheckCode is not equal to zero, quit and return error
+    if errorCheckCode == 0:# If errorCheckCode is equal to zero, return success
         return("success")
 
 def startup():
@@ -132,7 +132,7 @@ def normalMove(pos):
         if code != 0: return (errorCheck(code)+"_pos"+str(pos)+"_1")# If there's an error code check and return it to the Labview VI with the position and movement step
         code = arm.set_position(*posArray[pos], speed=params['speed'], mvacc=params['acc'], wait=True)# Move the arm linearly to the desired coordinates
         if code != 0: return (errorCheck(code)+"_pos"+str(pos)+"_2")# If there's an error code check and return it to the Labview VI with the position and movement step
-        code = arm.set_position(z=-100, speed=params['speed'], mvacc=params['acc'], relative=True, wait=True)# Move the arm down 100 mm
+        code = arm.set_position(z=-100, speed=params['speed'], mvacc=params['acc'], relative=True, wait=True)# Move the arm up 100 mm
     return(errorCheck(code)+"_pos"+str(pos)+"_3")# Check for error code and send status to the Labview VI with the position and movement step
 
 def pos1():
